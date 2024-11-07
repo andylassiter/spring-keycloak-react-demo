@@ -12,7 +12,7 @@ function App() {
   // Initialize Keycloak and check authentication
   useEffect(() => {
     const keycloakInstance = new Keycloak({
-      url: "http://localhost:8081/",
+      url: "/auth",
       realm: "demo",
       clientId: "frontend",
     });
@@ -31,7 +31,7 @@ function App() {
   // Fetch message from backend when authenticated
   useEffect(() => {
     if (authenticated && keycloak?.token) {
-      fetch("http://localhost:8080/api/hello", {
+      fetch("/api/hello", {
         headers: {
           Authorization: `Bearer ${keycloak.token}`,
           AccessControlAllowOrigin: "*"
@@ -46,7 +46,7 @@ function App() {
     // Fetch admin message from backend
     const fetchAdminMessage = () => {
         if (keycloak?.token) {
-            fetch("http://localhost:8080/api/admin", {
+            fetch("/api/admin", {
                 headers: {
                     Authorization: `Bearer ${keycloak.token}`,
                     AccessControlAllowOrigin: "*"
